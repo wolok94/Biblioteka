@@ -1,0 +1,2 @@
+Biblioteka.Magazine;Komputer Świat; Kamil Wolak; 2022; 5; Greg; 
+Biblioteka.Book;Pan Tadeusz; Greg; 2010; Adam Mickiewicz; 456; 789; 
