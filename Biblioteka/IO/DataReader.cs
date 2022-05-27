@@ -26,6 +26,7 @@ namespace Biblioteka
             int pages = int.Parse(Console.ReadLine());
 
 
+
             return new Book(title, author, isbn, year, publisher, pages);
         }
         public Magazine createMagazine()
@@ -40,6 +41,7 @@ namespace Biblioteka
             int year = int.Parse(Console.ReadLine());
             writer.printText("Podaj miesiąc wydania");
             int month = int.Parse(Console.ReadLine());
+
 
 
             return new Magazine(title, author, year, month, publisher);

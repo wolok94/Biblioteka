@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Biblioteka.Exception
 {
-    class PublicationAlreadyExistsException : IOException
+    class PublicationAlreadyExistsException : SystemException
     {
         public PublicationAlreadyExistsException() { 
 

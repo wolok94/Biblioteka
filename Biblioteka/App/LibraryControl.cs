@@ -17,12 +17,35 @@ namespace Biblioteka
         Library library = new Library();
         ConsolePrinter printer = new ConsolePrinter();
         CsvFileManager csv = new CsvFileManager();
+        SerializableFileManager serial = new SerializableFileManager();
 
 
        public void controlLoop()
         {
             int choice = 10;
-            library = csv.importData();
+            printCsvOrSerialize();
+            switch (Console.ReadLine())
+            { 
+                case "csv":
+                    
+                    library = csv.importData();
+                    break;
+                case "serial":
+                    try
+                    {
+                        library = serial.importData();
+                    }catch (Newtonsoft.Json.JsonSerializationException e)
+                    {
+                        Console.WriteLine("Błąd");
+                    }
+                    break;
+
+            }
+            if (library == null)
+            {
+                library = new Library();
+            }
+            
             do
             {
                 printOptions();
@@ -43,6 +66,13 @@ namespace Biblioteka
                         break;
                     case (int)Option.EXIT:
                         csv.exportData(library);
+                        try
+                        {
+                            serial.exportData(library);
+                        }catch(NotImplementedException e)
+                        {
+                            Console.WriteLine("Błąd");
+                        }
                         Console.WriteLine("Koniec programu, papa");
                         break;
 
@@ -75,6 +105,7 @@ namespace Biblioteka
         }
         void printBooks()
         {
+
             printer.printBooks(library.Publications);
         }
         void printMagazine()
@@ -88,6 +119,11 @@ namespace Biblioteka
                 "3. Wypisz książki\n" +
                 "4. Wypisz magazyny");
         }
+        void printCsvOrSerialize()
+        {
+            Console.WriteLine("Csv\n" +
+                "Serial");
+        }
         enum Option
         {
             ADD_BOOK = 1,
@@ -97,6 +133,11 @@ namespace Biblioteka
             EXIT = 0,
 
 
+        }
+        enum CsvOrSerialize
+        {
+            CSV,
+            Serial,
         }
     }
 

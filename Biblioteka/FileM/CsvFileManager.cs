@@ -40,7 +40,7 @@ namespace Biblioteka.FileM
             foreach (var line in library)
             {
                 Publication publication = createObjectFromString(line);
-                lib.Publications.Add(publication.Title, publication);
+                lib.Publications.Add(publication.Id, publication);
              }
             
         }
@@ -62,14 +62,16 @@ namespace Biblioteka.FileM
         }
         public Book createBook(string [] data)
         {
+            
             string title = data[1];
             string publisher = data[2];
             int year = int.Parse(data[3]);
             string author = data[4];
             int isbn = int.Parse(data[5]);
             int pages = int.Parse(data[6]);
-
-            return new Book(title, author, isbn, year, publisher, pages);
+            Book book = new Book(title, author, isbn, year, publisher, pages);
+            book.Type = Book.TYPE;
+            return book;
         }
         public Magazine createMagazine(string [] data)
         {
@@ -78,7 +80,7 @@ namespace Biblioteka.FileM
             int year = int.Parse(data[3]);
             int month = int.Parse(data[4]);
             string publisher = data[5];
-
+            
 
             return new Magazine(title,author,year,month,publisher);
         }

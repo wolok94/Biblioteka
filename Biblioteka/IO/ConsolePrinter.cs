@@ -13,20 +13,24 @@ namespace Biblioteka
         {
             Console.WriteLine(text);
         }
-        public void printBooks(SortedDictionary<string, Publication> dic)
+        public void printBooks(SortedDictionary<int, Publication> dic)
         {
-            var a =  dic.Where(p => p.Value.GetType() == typeof(Book)).ToDictionary(p => p.Key, p => p.Value);
+
+            var a = dic.Where(p => p.Value.GetType().ToString().Equals(Book.TYPE)).ToDictionary(p=> p.Key, p=> p.Value);
             foreach (Publication publication in a.Values)
             {
+                
                 printText(publication.ToString());
             }
 
         }
-        public void printMagazine(SortedDictionary<string, Publication> dic)
+        public void printMagazine(SortedDictionary<int, Publication> dic)
         {
-            var a = dic.Where(p => p.Value.GetType() == typeof(Magazine)).ToDictionary(p => p.Key, p => p.Value);
+
+            var a = dic.Where(p => p.Value is Magazine).ToDictionary(p => p.Key, p=> p.Value);
             foreach (Publication publication in a.Values)
             {
+                
             printText(publication.ToString());
             }
         }

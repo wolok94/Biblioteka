@@ -7,31 +7,34 @@ using System.Threading.Tasks;
 
 namespace Biblioteka
 {
+    
     public class Magazine : Publication
     {
-        private string title;
-        private string author;
-        private int year;
+
+
+        public static readonly string TYPE = "Biblioteka.Magazine";
         private int month;
         private string publisher;
-        public static readonly string TYPE = "Biblioteka.Magazine";
+        private string type;
 
-        public Magazine(string title, string author, int year, int month, string publisher) : base(title,author,year)
+        public Magazine(string title, string author, int year, int month, string publisher) : base(title,author,year )
         {
             
 
             this.month = month;
-            this.publisher = publisher;
+            Publisher = publisher;
+            this.type = TYPE;
         }
 
-        public string Title { get => title; set => title = value; }
-        public string Author { get => author; set => author = value; }
+
+
         public int Month { get => month; set => month = value; }
         public string Publisher { get => publisher; set => publisher = value; }
+        public string Type { get => type; set => type = value; }
 
         public override string ToString()
         {
-            return base.ToString() + "; " + month + "; " + publisher+ "; ";
+            return base.ToString() + "; " + month + "; " + Publisher+ "; ";
         }
     }
 }

@@ -8,20 +8,21 @@ using Biblioteka.Exception;
 
 namespace Biblioteka
 {
+    [Serializable]
     public class Library
     {
 
-        private SortedDictionary<string, Publication> publications = new SortedDictionary<string, Publication>();
+        private SortedDictionary<int, Publication> publications = new SortedDictionary<int, Publication>();
 
-        public SortedDictionary<string, Publication> Publications { get => publications; set => publications = value; }
+        public SortedDictionary<int, Publication> Publications { get => publications; set => publications = value; }
 
         public void addPublication(Publication publication)
         {
-            if (publications.ContainsKey(publication.Title))
+            if (publications.ContainsKey(publication.Id))
             {
                 throw new PublicationAlreadyExistsException();
             }
-            Publications.Add(publication.Title, publication);
+            Publications.Add(publication.Id, publication);
         }
 
     }
