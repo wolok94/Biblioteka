@@ -27,7 +27,7 @@ namespace Biblioteka
 
 
 
-            return new Book(title, author, isbn, year, publisher, pages);
+            return new Book(title, author, isbn, year, publisher, pages,true);
         }
         public Magazine createMagazine()
         {
@@ -44,7 +44,7 @@ namespace Biblioteka
 
 
 
-            return new Magazine(title, author, year, month, publisher);
+            return new Magazine(title, author, year, month, publisher, false);
         }
 
         public int takeInt()

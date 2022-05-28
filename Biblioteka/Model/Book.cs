@@ -15,16 +15,22 @@ namespace Biblioteka
         private string author;
         private int isbn;
         private int pages;
+        
 
         
 
 
-        public Book(string title, string author, int isbn, int year, string publisher, int pages) : base(title, publisher, year)
+        public Book(string title, string author, int isbn, int year, string publisher, int pages, bool isBook) : base(title, publisher, year, isBook)
         {
             this.isbn = isbn;
             this.author = author;
             this.Pages = pages;
             this.type = TYPE;
+            isBook = true;
+        }
+        public Book()
+        {
+
         }
 
 

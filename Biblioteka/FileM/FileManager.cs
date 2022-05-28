@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Biblioteka.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Biblioteka.FileM
 {
     interface FileManager
     {
-        Library importData();
+        SortedDictionary<int,Publication> importData();
         void exportData(Library library);
     }
 }

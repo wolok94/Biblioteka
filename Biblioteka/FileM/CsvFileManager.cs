@@ -27,20 +27,20 @@ namespace Biblioteka.FileM
             File.WriteAllText(PATH, builder.ToString());
         }
 
-        public Library importData()
+        public SortedDictionary<int,Publication> importData()
         {
-            Library library = new Library();
-            importPublication(library);
-            return library;
+            SortedDictionary<int, Publication> publications = new SortedDictionary<int, Publication>();
+            importPublication(publications);
+            return publications;
         }
-        public void importPublication(Library lib)
+        public void importPublication(SortedDictionary<int, Publication> publications)
         {
 
             var library = File.ReadAllLines(@"E:\Programowanie\Ćwiczenia\Biblioteka\Biblioteka.txt");
             foreach (var line in library)
             {
                 Publication publication = createObjectFromString(line);
-                lib.Publications.Add(publication.Id, publication);
+                publications.Add(publication.Id, publication);
              }
             
         }
@@ -69,7 +69,7 @@ namespace Biblioteka.FileM
             string author = data[4];
             int isbn = int.Parse(data[5]);
             int pages = int.Parse(data[6]);
-            Book book = new Book(title, author, isbn, year, publisher, pages);
+            Book book = new Book(title, author, isbn, year, publisher, pages, true);
             book.Type = Book.TYPE;
             return book;
         }
@@ -82,7 +82,7 @@ namespace Biblioteka.FileM
             string publisher = data[5];
             
 
-            return new Magazine(title,author,year,month,publisher);
+            return new Magazine(title,author,year,month,publisher, false);
         }
     }
 }

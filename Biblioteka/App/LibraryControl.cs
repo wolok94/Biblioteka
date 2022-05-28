@@ -28,12 +28,12 @@ namespace Biblioteka
             { 
                 case "csv":
                     
-                    library = csv.importData();
+                    library.Publications = csv.importData();
                     break;
                 case "serial":
                     try
                     {
-                        library = serial.importData();
+                        library.Publications = serial.importData();
                     }catch (Newtonsoft.Json.JsonSerializationException e)
                     {
                         Console.WriteLine("Błąd");

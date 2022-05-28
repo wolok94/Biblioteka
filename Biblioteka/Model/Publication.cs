@@ -17,17 +17,23 @@ namespace Biblioteka.Model
         private int year;
         private static int id = 0;
         private int myId;
+        private bool isBook;
         
 
 
 
 
-        public Publication(string title, string publisher, int year)
+        public Publication(string title, string publisher, int year, bool isBook)
         {
             this.title = title;
             this.publisher = publisher;
             this.year = year;
             myId = id++;
+            this.IsBook = isBook;
+        }
+        public Publication()
+        {
+
         }
 
         public string Title { get => title; set => title = value; }
@@ -35,6 +41,7 @@ namespace Biblioteka.Model
         public int Year { get => year; set => year = value; }
 
         public int Id { get => id; set => id = value; }
+        public bool IsBook { get => isBook; set => isBook = value; }
 
         public override string ToString()
         {

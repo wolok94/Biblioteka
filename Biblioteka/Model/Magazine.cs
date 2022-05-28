@@ -16,14 +16,20 @@ namespace Biblioteka
         private int month;
         private string publisher;
         private string type;
+        
 
-        public Magazine(string title, string author, int year, int month, string publisher) : base(title,author,year )
+        public Magazine(string title, string author, int year, int month, string publisher, bool isBook) : base(title,author,year,isBook )
         {
             
 
             this.month = month;
             Publisher = publisher;
             this.type = TYPE;
+            isBook = false;
+        }
+        public Magazine()
+        {
+
         }
 
 
