@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json.Linq;
 using Biblioteka.Model;
+using Biblioteka.Exception;
 
 namespace Biblioteka.FileM
 {
@@ -14,7 +15,7 @@ namespace Biblioteka.FileM
     {
         public void exportData(Library library)
         {
-            string serializedLibrary = JsonConvert.SerializeObject(library.Publications);
+            string serializedLibrary = JsonConvert.SerializeObject(library.Publications, new PublicationConverter());
             File.WriteAllText(@"E:\Programowanie\Ćwiczenia\Biblioteka\SerializedLibrary.Json", serializedLibrary);
         }
 
@@ -25,13 +26,17 @@ namespace Biblioteka.FileM
             {
                 SortedDictionary<int,Publication> publications = 
                     (SortedDictionary<int, Publication>)JsonConvert.DeserializeObject<SortedDictionary<int, Publication>>(deserializedLibrary, new PublicationConverter());
+                if (publications == null)
+                {
+                    publications = new SortedDictionary<int, Publication>();
+                }
                 return publications;
             }
             catch (NullReferenceException e)
             {
                 Console.WriteLine("Nie znaleziono bazy");
             }
-            return new SortedDictionary<int, Publication>();
+            throw new DeserializedDictionaryIsEmptyException();
             
 
             

@@ -19,6 +19,7 @@ namespace Biblioteka.Model
         private int myId;
         private bool isBook;
         
+        
 
 
 
@@ -42,7 +43,9 @@ namespace Biblioteka.Model
 
         public int Id { get => id; set => id = value; }
         public bool IsBook { get => isBook; set => isBook = value; }
-
+        public bool isRented { get; set; }
+        public DateTime rentalDate { get; set; }
+        public DateTime deliveryDate { get; set; }
         public override string ToString()
         {
             return title +  "; " + publisher + "; " + year;

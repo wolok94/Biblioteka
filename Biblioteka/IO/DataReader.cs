@@ -46,6 +46,17 @@ namespace Biblioteka
 
             return new Magazine(title, author, year, month, publisher, false);
         }
+        public Reader createReader()
+        {
+            Console.WriteLine("Podaj imię");
+            string name = Console.ReadLine();
+            Console.WriteLine("Podaj nazwisko");
+            string lastName = Console.ReadLine();
+            Console.WriteLine("Podaj e-mail");
+            string eMail = Console.ReadLine();
+
+            return new Reader(name, lastName, eMail);
+        }
 
         public int takeInt()
         {

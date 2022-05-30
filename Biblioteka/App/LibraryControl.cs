@@ -34,9 +34,12 @@ namespace Biblioteka
                     try
                     {
                         library.Publications = serial.importData();
-                    }catch (Newtonsoft.Json.JsonSerializationException e)
+                    } catch (Newtonsoft.Json.JsonSerializationException e)
                     {
                         Console.WriteLine("Błąd");
+                    } catch (DeserializedDictionaryIsEmptyException e)
+                    {
+                        Console.WriteLine("Baza jest pusta");
                     }
                     break;
 
@@ -64,6 +67,10 @@ namespace Biblioteka
                     case (int)Option.PRINT_MAGAZINE:
                         printMagazine();
                         break;
+                    case (int)Option.ADD_READER:
+                        addUser();
+                        break;
+
                     case (int)Option.EXIT:
                         csv.exportData(library);
                         try
@@ -78,6 +85,13 @@ namespace Biblioteka
 
                 }
             } while (choice != 0);
+            
+        }
+        void addUser()
+        {
+            Reader read = reader.createReader();
+          
+                library.addUser(read);
             
         }
         void addBook()
@@ -130,6 +144,7 @@ namespace Biblioteka
             ADD_MAGAZINE = 2,
             PRINT_BOOK = 3,
             PRINT_MAGAZINE = 4,
+            ADD_READER = 5,
             EXIT = 0,
 
 
