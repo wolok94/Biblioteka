@@ -16,8 +16,9 @@ namespace Biblioteka
         DataReader reader = new DataReader();
         Library library = new Library();
         ConsolePrinter printer = new ConsolePrinter();
-        CsvFileManager csv = new CsvFileManager();
-        SerializableFileManager serial = new SerializableFileManager();
+        CsvFileManager<Publication> csv = new CsvFileManager<Publication>();
+        SerializableFileManager<Publication> serial = new SerializableFileManager<Publication>();
+        SerializableFileManager<User> serialUser = new SerializableFileManager<User>();
 
 
        public void controlLoop()
@@ -27,13 +28,14 @@ namespace Biblioteka
             switch (Console.ReadLine())
             { 
                 case "csv":
-                    
+                    library.Users = csv.importUsers<User>();
                     library.Publications = csv.importData();
                     break;
                 case "serial":
                     try
                     {
                         library.Publications = serial.importData();
+                        library.Users = serialUser.importData();
                     } catch (Newtonsoft.Json.JsonSerializationException e)
                     {
                         Console.WriteLine("Błąd");
@@ -70,12 +72,17 @@ namespace Biblioteka
                     case (int)Option.ADD_READER:
                         addUser();
                         break;
+                    case (int)Option.PRINT_READER:
+                        printUsers();
+                        break;
 
                     case (int)Option.EXIT:
                         csv.exportData(library);
+                        csv.exportUsers(library);
                         try
                         {
                             serial.exportData(library);
+                            serialUser.exportData(library);
                         }catch(NotImplementedException e)
                         {
                             Console.WriteLine("Błąd");
@@ -126,12 +133,18 @@ namespace Biblioteka
         {
             printer.printMagazine(library.Publications);
         }
+        void printUsers()
+        {
+            printer.printUsers(library.Users);
+        }
         void printOptions()
         {
             Console.WriteLine("1. Dodaj książkę\n" +
                 "2. Dodaj magazyn\n" +
                 "3. Wypisz książki\n" +
-                "4. Wypisz magazyny");
+                "4. Wypisz magazyny\n" +
+                "5. Dodaj użytkownika\n" +
+                "6. Wypisz użytkowników");
         }
         void printCsvOrSerialize()
         {
@@ -145,6 +158,7 @@ namespace Biblioteka
             PRINT_BOOK = 3,
             PRINT_MAGAZINE = 4,
             ADD_READER = 5,
+            PRINT_READER = 6,
             EXIT = 0,
 
 

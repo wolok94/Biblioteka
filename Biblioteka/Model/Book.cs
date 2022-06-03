@@ -78,7 +78,7 @@ namespace Biblioteka
 
         public override string ToString() 
         {
-            return base.ToString() + "; " + author + "; "  +  isbn + "; " + pages + "; " ;
+            return base.ToString() + "; " + author + "; "  +  isbn + "; " + pages + "; " + MyId + "; " ;
         }
     }
 }

@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Biblioteka
 {
-    public  class PublicationConverter : Newtonsoft.Json.JsonConverter
+    public  class PublicationConverter<T> : Newtonsoft.Json.JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
-            return typeof(Publication).IsAssignableFrom(objectType);
+            return typeof(T).IsAssignableFrom(objectType);
         }
 
         public override object ReadJson(JsonReader reader,
@@ -27,18 +27,33 @@ namespace Biblioteka
             
 
             Publication publication = null;
-            if (isBook.GetValueOrDefault())
+            User user = null;
+            if (typeof(T).Equals(typeof(Publication)))
             {
-                publication = new Book();
+                if (isBook.GetValueOrDefault())
+                {
+                    publication = new Book();
+                }
+                else if (!isBook.GetValueOrDefault())
+                {
+                    publication = new Magazine();
+                }
+                serializer.Populate(jo.CreateReader(), publication);
+                jo = null;
+                return publication;
             }
             else
+            
             {
-                publication = new Magazine();
+                
+                user = new Reader();
+                serializer.Populate(jo.CreateReader(), user);
+                
+                return user;
+
             }
 
-            serializer.Populate(jo.CreateReader(), publication);
-
-            return publication;
+                
         }
 
         public override bool CanWrite

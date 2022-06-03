@@ -11,24 +11,44 @@ using Biblioteka.Exception;
 
 namespace Biblioteka.FileM
 {
-    public class SerializableFileManager : FileManager
+    public class SerializableFileManager<T> : FileManager<T>
     {
         public void exportData(Library library)
         {
-            string serializedLibrary = JsonConvert.SerializeObject(library.Publications, new PublicationConverter());
-            File.WriteAllText(@"E:\Programowanie\Ćwiczenia\Biblioteka\SerializedLibrary.Json", serializedLibrary);
+            string serializedLibrary;
+            if (typeof(T).Equals(typeof(Publication)))
+            {
+                serializedLibrary = JsonConvert.SerializeObject(library.Publications, new PublicationConverter<T>());
+                File.WriteAllText(@"E:\Programowanie\Ćwiczenia\Biblioteka\SerializedLibrary.Json", serializedLibrary);
+            }
+            else
+            {
+                serializedLibrary = JsonConvert.SerializeObject(library.Users, new PublicationConverter<T>());
+                File.WriteAllText(@"E:\Programowanie\Ćwiczenia\Biblioteka\SerializedUsers.Json", serializedLibrary);
+            }
+                
         }
 
-        public SortedDictionary<int, Publication> importData()
+
+        public  SortedDictionary<int, T>  importData()
         {
-            string deserializedLibrary = File.ReadAllText(@"E:\Programowanie\Ćwiczenia\Biblioteka\SerializedLibrary.Json");
+            string deserializedLibrary;
+            if (typeof(T).Equals(typeof(Publication)))
+            {
+                deserializedLibrary = File.ReadAllText(@"E:\Programowanie\Ćwiczenia\Biblioteka\SerializedLibrary.Json");
+            }
+            else
+            {
+                deserializedLibrary = File.ReadAllText(@"E:\Programowanie\Ćwiczenia\Biblioteka\SerializedUsers.Json");
+            }
+            
             try
             {
-                SortedDictionary<int,Publication> publications = 
-                    (SortedDictionary<int, Publication>)JsonConvert.DeserializeObject<SortedDictionary<int, Publication>>(deserializedLibrary, new PublicationConverter());
+                SortedDictionary<int,T> publications = 
+                    (SortedDictionary<int, T>)JsonConvert.DeserializeObject<SortedDictionary<int, T>>(deserializedLibrary, new PublicationConverter<T>());
                 if (publications == null)
                 {
-                    publications = new SortedDictionary<int, Publication>();
+                    publications = new SortedDictionary<int, T>();
                 }
                 return publications;
             }
@@ -43,5 +63,9 @@ namespace Biblioteka.FileM
         }
 
 
+
+
     }
-}
+            }
+    
+

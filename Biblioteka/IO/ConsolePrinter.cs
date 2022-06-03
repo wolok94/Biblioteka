@@ -34,6 +34,13 @@ namespace Biblioteka
             printText(publication.ToString());
             }
         }
+        public void printUsers(SortedDictionary<int,User> users)
+        {
+            foreach(User user in users.Values)
+            {
+                Console.WriteLine(user.ToString());
+            }
+        }
 
 
     }

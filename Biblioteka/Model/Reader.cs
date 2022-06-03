@@ -10,11 +10,16 @@ namespace Biblioteka.Model
     {
         private List <Publication> rentedPublications = new List <Publication> ();
 
+        public Reader()
+        {
+
+        }
 
         public Reader(string name, string lastName, string email) : base(name, lastName, email)
         {
             
         }
+
 
         public void rentPublication (Publication publication)
         {
@@ -30,6 +35,10 @@ namespace Biblioteka.Model
             publication.isRented= false;
             publication.rentalDate = DateTime.MinValue;
             publication.deliveryDate = DateTime.MinValue;
+        }
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 }

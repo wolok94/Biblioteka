@@ -40,7 +40,7 @@ namespace Biblioteka
 
         public override string ToString()
         {
-            return base.ToString() + "; " + month + "; " + author+ "; ";
+            return base.ToString() + "; " + month + "; " + author+ "; " + MyId + "; ";
         }
     }
 }

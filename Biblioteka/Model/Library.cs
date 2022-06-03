@@ -22,12 +22,12 @@ namespace Biblioteka
         {
             if (publications != null)
             {
-                if (publications.ContainsKey(publication.Id))
+                if (publications.ContainsKey(publication.MyId))
                 {
                     throw new PublicationAlreadyExistsException();
                 }
             }
-            publications.Add(publication.Id, publication);
+            publications.Add(publication.MyId, publication);
             
         }
         public void addUser(User user)

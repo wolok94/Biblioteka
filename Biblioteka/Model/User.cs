@@ -8,8 +8,12 @@ namespace Biblioteka.Model
 {
     public abstract class User
     {
-        private static int id = 0;
+        private static int id = 1;
 
+        public User()
+        {
+
+        }
         protected User(string name, string lastName, string email)
         {
             this.name = name;
@@ -27,7 +31,7 @@ namespace Biblioteka.Model
 
         public override string ToString()
         {
-            return name + " " + lastName + " " + email;
+            return name + ";" + lastName + ";" + email;
         }
     }
 }

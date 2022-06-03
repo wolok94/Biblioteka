@@ -29,7 +29,7 @@ namespace Biblioteka.Model
             this.title = title;
             this.publisher = publisher;
             this.year = year;
-            myId = id++;
+            MyId = id + 1;
             this.IsBook = isBook;
         }
         public Publication()
@@ -46,9 +46,11 @@ namespace Biblioteka.Model
         public bool isRented { get; set; }
         public DateTime rentalDate { get; set; }
         public DateTime deliveryDate { get; set; }
+        public int MyId { get => myId; set => myId = value; }
+
         public override string ToString()
         {
-            return title +  "; " + publisher + "; " + year;
+            return title + "; " + publisher + "; " + year;
         }
 
         public override bool Equals(object? obj)
@@ -58,7 +60,7 @@ namespace Biblioteka.Model
                    publisher == publication.publisher &&
                    year == publication.year &&
                    
-                   myId == publication.myId &&
+                   MyId == publication.MyId &&
                    Title == publication.Title &&
                    Publisher == publication.Publisher &&
                    Year == publication.Year &&
@@ -73,7 +75,7 @@ namespace Biblioteka.Model
             hash.Add(publisher);
             hash.Add(year);
             
-            hash.Add(myId);
+            hash.Add(MyId);
             hash.Add(Title);
             hash.Add(Publisher);
             hash.Add(Year);

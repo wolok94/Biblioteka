@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace Biblioteka.FileM
 {
-    interface FileManager <T> 
-    { 
-        SortedDictionary<int,T> importData();
-        void exportData(Library library);
-
+    interface UsersFileManager
+    {
+        public SortedDictionary<int, User> importUsers();
+        public void exportUsers(Library library);
     }
 }
