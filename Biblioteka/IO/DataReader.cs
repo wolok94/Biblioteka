@@ -55,7 +55,19 @@ namespace Biblioteka
             Console.WriteLine("Podaj e-mail");
             string eMail = Console.ReadLine();
 
-            return new Reader(name, lastName, eMail);
+            return new Reader(name, lastName, eMail, false);
+        }
+        public Admin createAdmin()
+        {
+            Console.WriteLine("Podaj imię");
+            string name = Console.ReadLine();
+            Console.WriteLine("Podaj nazwisko");
+            string lastName = Console.ReadLine();
+            Console.WriteLine("Podaj e-mail");
+            string eMail = Console.ReadLine();
+            Console.WriteLine("Podaj hasło");
+            string password = Console.ReadLine();
+            return new Admin(name, lastName, eMail, password, true);
         }
 
         public int takeInt()

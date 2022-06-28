@@ -11,19 +11,19 @@ using Biblioteka.Exception;
 
 namespace Biblioteka.FileM
 {
-    public class SerializableFileManager<T> : FileManager<T>
+    public class SerializableFileManager<T> : IFileManager<T>
     {
         public void exportData(Library library)
         {
             string serializedLibrary;
             if (typeof(T).Equals(typeof(Publication)))
             {
-                serializedLibrary = JsonConvert.SerializeObject(library.Publications, new PublicationConverter<T>());
+                serializedLibrary = JsonConvert.SerializeObject(library.Publications, new DataConverter<T>());
                 File.WriteAllText(@"E:\Programowanie\Ćwiczenia\Biblioteka\SerializedLibrary.Json", serializedLibrary);
             }
             else
             {
-                serializedLibrary = JsonConvert.SerializeObject(library.Users, new PublicationConverter<T>());
+                serializedLibrary = JsonConvert.SerializeObject(library.Users, new DataConverter<T>());
                 File.WriteAllText(@"E:\Programowanie\Ćwiczenia\Biblioteka\SerializedUsers.Json", serializedLibrary);
             }
                 
@@ -45,7 +45,7 @@ namespace Biblioteka.FileM
             try
             {
                 SortedDictionary<int,T> publications = 
-                    (SortedDictionary<int, T>)JsonConvert.DeserializeObject<SortedDictionary<int, T>>(deserializedLibrary, new PublicationConverter<T>());
+                    (SortedDictionary<int, T>)JsonConvert.DeserializeObject<SortedDictionary<int, T>>(deserializedLibrary, new DataConverter<T>());
                 if (publications == null)
                 {
                     publications = new SortedDictionary<int, T>();

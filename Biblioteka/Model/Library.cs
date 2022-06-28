@@ -15,8 +15,9 @@ namespace Biblioteka
         private SortedDictionary<int, Publication> publications = new SortedDictionary<int, Publication>();
         private SortedDictionary<int, User> users = new SortedDictionary<int, User>();
 
-        public SortedDictionary<int, Publication> Publications { get => publications; set => publications = value; }
-        public SortedDictionary<int, User> Users { get => users; set => users = value; }
+        public SortedDictionary<int, Publication> Publications { get; set; }
+        public SortedDictionary<int, User> Users { get; set; }
+        public ConsolePrinter printer = new ConsolePrinter();
 
         public void addPublication(Publication publication)
         {
@@ -36,6 +37,14 @@ namespace Biblioteka
             {
                 users.Add(user.myId,user);
             }
+        }
+
+        public Publication returnPublicationToRent()
+        {
+            int id = printer.choosePublicationToRent(publications);
+            return publications[id];
+
+
         }
 
     }

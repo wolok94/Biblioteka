@@ -7,25 +7,17 @@ using System.Threading.Tasks;
 
 namespace Biblioteka
 {
-    
+
     public class Book : Publication
     {
         public static readonly string TYPE = "Biblioteka.Book";
-        private string type;
-        private string author;
-        private int isbn;
-        private int pages;
-        
-
-        
-
 
         public Book(string title, string author, int isbn, int year, string publisher, int pages, bool isBook) : base(title, publisher, year, isBook)
         {
-            this.isbn = isbn;
-            this.author = author;
+            this.Isbn = isbn;
+            this.Author = author;
             this.Pages = pages;
-            this.type = TYPE;
+            this.Type = TYPE;
             isBook = true;
         }
         public Book()
@@ -34,10 +26,10 @@ namespace Biblioteka
         }
 
 
-        public string Author { get => author; set => author = value; }
-        public int Isbn { get => isbn; set => isbn = value; }
-        public int Pages { get => pages; set => pages = value; }
-        public string Type { get => type; set => type = value; }
+        public string Author { get; }
+        public int Isbn { get; }
+        public int Pages { get; }
+        public string Type { get; }
 
         public override bool Equals(object? obj)
         {
@@ -47,10 +39,6 @@ namespace Biblioteka
                    Year == book.Year &&
                    Type == book.Type &&
                    Id == book.Id &&
-                   type == book.type &&
-                   author == book.author &&
-                   isbn == book.isbn &&
-                   pages == book.pages &&
                    Author == book.Author &&
                    Isbn == book.Isbn &&
                    Pages == book.Pages &&
@@ -65,10 +53,6 @@ namespace Biblioteka
             hash.Add(Year);
             hash.Add(Type);
             hash.Add(Id);
-            hash.Add(type);
-            hash.Add(author);
-            hash.Add(isbn);
-            hash.Add(pages);
             hash.Add(Author);
             hash.Add(Isbn);
             hash.Add(Pages);
@@ -76,9 +60,11 @@ namespace Biblioteka
             return hash.ToHashCode();
         }
 
-        public override string ToString() 
+        public override string ToString()
         {
-            return base.ToString() + "; " + author + "; "  +  isbn + "; " + pages + "; " + MyId + "; " ;
+            return base.ToString() + ";" + Author + ";" + Isbn + ";" + Pages + ";";
         }
+
+
     }
 }

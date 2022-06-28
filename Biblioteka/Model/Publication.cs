@@ -12,23 +12,14 @@ namespace Biblioteka.Model
     
     public abstract class Publication 
     {
-        private string title;
-        private string publisher;
-        private int year;
+
         private static int id = 0;
-        private int myId;
-        private bool isBook;
-        
-        
 
-
-
-
-        public Publication(string title, string publisher, int year, bool isBook)
+ public Publication(string title, string publisher, int year, bool isBook)
         {
-            this.title = title;
-            this.publisher = publisher;
-            this.year = year;
+            this.Title = title;
+            this.Publisher = publisher;
+            this.Year = year;
             MyId = id + 1;
             this.IsBook = isBook;
         }
@@ -37,29 +28,30 @@ namespace Biblioteka.Model
 
         }
 
-        public string Title { get => title; set => title = value; }
-        public string Publisher { get => publisher; set => publisher = value; }
-        public int Year { get => year; set => year = value; }
+        public string Title { get; }
+        public string Publisher { get; }
+        public int Year { get; }
 
-        public int Id { get => id; set => id = value; }
-        public bool IsBook { get => isBook; set => isBook = value; }
+        public int Id { get; }
+        public bool IsBook { get; }
         public bool isRented { get; set; }
         public DateTime rentalDate { get; set; }
         public DateTime deliveryDate { get; set; }
-        public int MyId { get => myId; set => myId = value; }
+        public int MyId { get; private set; }
 
+        public void setId(int id)
+        {
+            MyId = id;
+        }
         public override string ToString()
         {
-            return title + "; " + publisher + "; " + year;
+            return MyId + ";" + Title + ";" + Publisher + ";" + Year;
         }
 
         public override bool Equals(object? obj)
         {
             return obj is Publication publication &&
-                   title == publication.title &&
-                   publisher == publication.publisher &&
-                   year == publication.year &&
-                   
+
                    MyId == publication.MyId &&
                    Title == publication.Title &&
                    Publisher == publication.Publisher &&
@@ -71,10 +63,7 @@ namespace Biblioteka.Model
         public override int GetHashCode()
         {
             HashCode hash = new HashCode();
-            hash.Add(title);
-            hash.Add(publisher);
-            hash.Add(year);
-            
+
             hash.Add(MyId);
             hash.Add(Title);
             hash.Add(Publisher);

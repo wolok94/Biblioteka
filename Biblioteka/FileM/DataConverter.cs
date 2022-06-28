@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Biblioteka
 {
-    public  class PublicationConverter<T> : Newtonsoft.Json.JsonConverter
+    public  class DataConverter<T> : Newtonsoft.Json.JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
@@ -24,10 +24,12 @@ namespace Biblioteka
 
             // Using a nullable bool here in case "is_album" is not present on an item
             bool? isBook = (bool?)jo["IsBook"];
-            
+            bool? isAdmin = (bool?)jo["IsAdmin"];
+
 
             Publication publication = null;
             User user = null;
+
             if (typeof(T).Equals(typeof(Publication)))
             {
                 if (isBook.GetValueOrDefault())
@@ -41,19 +43,28 @@ namespace Biblioteka
                 serializer.Populate(jo.CreateReader(), publication);
                 jo = null;
                 return publication;
-            }
-            else
+                }
+            else 
             
             {
-                
-                user = new Reader();
-                serializer.Populate(jo.CreateReader(), user);
-                
-                return user;
+                if (isAdmin.GetValueOrDefault())
+                {
+                    user = new Admin();
+                }
+                else if (!isAdmin.GetValueOrDefault())
+                {
 
+                        user = new Reader();
+                           
+                }
+                serializer.Populate(jo.CreateReader(), user);
+
+                return user;
+                
             }
 
-                
+
+            
         }
 
         public override bool CanWrite

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Biblioteka.FileM
+namespace Biblioteka
 {
-    public class FileManagerBuilder
+    class asd
     {
-        
     }
 }

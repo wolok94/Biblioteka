@@ -9,17 +9,18 @@ namespace Biblioteka.Model
     public abstract class User
     {
         private static int id = 1;
-
+        public bool IsAdmin { get; set; }
         public User()
         {
 
         }
-        protected User(string name, string lastName, string email)
+        protected User(string name, string lastName, string email, bool isAdmin)
         {
             this.name = name;
             this.lastName = lastName;
             this.email = email;
             this.myId = id++;
+            this.IsAdmin = isAdmin;
         }
 
         public string name { get; set; }
@@ -31,7 +32,7 @@ namespace Biblioteka.Model
 
         public override string ToString()
         {
-            return name + ";" + lastName + ";" + email;
+            return name + ";" + lastName + ";" + email + ";";
         }
     }
 }
